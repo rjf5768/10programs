@@ -1,0 +1,26 @@
+#include <klee/klee.h>
+#include <stdio.h>
+
+int alwaysReturnsZero(int a) {
+    // Dead branch inside
+    if (a == 9999) {
+        return 1;
+    }
+    return 0;
+}
+
+int main() {
+    int x;
+    klee_make_symbolic(&x, sizeof(x), "x");
+
+    if (x < 10) {
+        printf("x < 10\n");
+    } else {
+        printf("x >= 10\n");
+    }
+
+    int check = alwaysReturnsZero(x);
+    printf("check = %d\n", check);
+
+    return 0;
+}

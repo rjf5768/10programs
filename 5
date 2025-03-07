@@ -1,0 +1,21 @@
+#include <klee/klee.h>
+#include <stdio.h>
+
+int main() {
+    int x;
+    klee_make_symbolic(&x, sizeof(x), "x");
+
+    // A loop that won't run if x <= 0
+    // Possibly "dead" if x <= 0 is always chosen
+    for (int i = 0; i < x; i++) {
+        // Just a print
+        printf("Iteration: %d\n", i);
+    }
+
+    // Dead code: This if statement is unreachable if x > 10 for example
+    if (x < -10000) {
+        printf("This is never reached for normal x.\n");
+    }
+    
+    return 0;
+}

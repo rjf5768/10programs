@@ -1,0 +1,23 @@
+#include <klee/klee.h>
+#include <stdio.h>
+
+int main() {
+    int x;
+    klee_make_symbolic(&x, sizeof(x), "x");
+
+    if (x < 0) {
+        if (x == -9999) {
+            // Rare path
+            printf("Super negative x.\n");
+        }
+        printf("x is negative.\n");
+    } else if (x == 0) {
+        printf("x is zero.\n");
+    } else if (x > 100) {
+        // Possibly dead unless we feed big values
+        printf("x is greater than 100.\n");
+    } else {
+        printf("x is positive but <= 100.\n");
+    }
+    return 0;
+}
