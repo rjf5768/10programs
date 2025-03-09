@@ -1,7 +1,0 @@
-Error: external call with symbolic argument: printf
-File: 3.c
-Line: 17
-assembly.ll line: 51
-State: 2
-Stack: 
-	#000000051 in main() at 3.c:17

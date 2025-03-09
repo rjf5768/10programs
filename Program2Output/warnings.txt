@@ -1,2 +1,0 @@
-KLEE: WARNING: undefined reference to function: printf
-KLEE: WARNING ONCE: calling external: printf(126379255398400) at 2.c:14 13

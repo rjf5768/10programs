@@ -1,25 +1,24 @@
 #include <klee/klee.h>
-#include <stdio.h>
-
-// Dead function: never called
-void neverCalled() {
-    printf("I'm never called!\n");
-}
 
 int main() {
-    int x;
-    klee_make_symbolic(&x, sizeof(x), "x");
-
-    if (x > 0) {
-        printf("x is positive.\n");
+    int a;
+    klee_make_symbolic(&a, sizeof(a), "a");
+    int b = 20;
+    int c = 20;
+    int ret;
+    if (a > 5) {
+        ret = 1;
     } else {
-        // Even if x == 0, it also goes here, but let's add a dead path inside
-        if (x == -99999) {
-            // This path is essentially a "dead path" if we don't allow such large negative values
-            printf("Magic negative!\n");
-        }
-        printf("x is non-positive.\n");
+        ret = 2;
     }
 
-    return 0;
+    // Unreachable branch: 
+    if (b > 100) {
+        return 42;
+    }
+    if (c > 100) {
+        return 42;
+    }
+
+    return ret;
 }

@@ -1,25 +1,30 @@
 #include <klee/klee.h>
 #include <stdio.h>
 
-// Unused variable
-int globalUnused = 0;
+
 
 int main() {
     int x;
+    // Unused variable
+    int globalUnused = 0;
     klee_make_symbolic(&x, sizeof(x), "x");
-
+    switch (globalUnused){
+        case 2:
+            return 42;
+            break;
+    }
     switch (x) {
         case 0:
-            printf("x is 0\n");
+            return 0;
             break;
         case 1:
-            printf("x is 1\n");
+            return 1;
             break;
         case 99999:
-            printf("Magic big number.\n");
+            return 99999;
             break;
         default:
-            printf("x is something else.\n");
+            return 0;
             break;
     }
 
