@@ -16,3 +16,4 @@ int main() {
         return 2;
     }
 }
+//ktest1 11, ktest2 0

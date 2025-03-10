@@ -22,3 +22,4 @@ int main() {
 
     return ret;
 }
+//ktest1 input 0, ktest2 input 6
